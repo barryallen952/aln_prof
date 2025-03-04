@@ -37,7 +37,7 @@ const Navbar = () => {
             <FaGithub />
           </a>
           <a
-            href="https://x.com/home"
+            href="https://x.com/PoudelRabin5824?s=09"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
