@@ -83,6 +83,7 @@ const Hero = () => {
                   className="text-blue-400 text-sm font-semibold "
                 />
               </span>
+
               <motion.p
                 variants={childVarients}
                 className="my-2  max-w-lg py-6  text-xl leading-relaxed tracking-tighter"
