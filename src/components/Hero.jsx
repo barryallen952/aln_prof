@@ -3,7 +3,7 @@ import profile_pic from "../assets/profileee.png";
 import { HERO_CONTENT } from "../constants/index.js";
 import { animate, motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import resume from "../assets/resume.pdf";
+import resume from "../assets/Rabin_Poudel_cv.pdf";
 const containerVarients = {
   hidden: { opacity: 0, x: -100 },
   visible: {
