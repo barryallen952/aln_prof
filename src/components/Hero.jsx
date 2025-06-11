@@ -45,37 +45,21 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               variants={containerVarients}
-              className="flex flex-col items-center lg:items-start mt-10"
+              className="flex flex-col items-center lg:items-start mt-15"
             >
               <motion.h2
                 variants={childVarients}
-                className="pb-2 text-4xl tracking-tighter lg:text-8xl"
+                className="pb-2 text-4xl tracking-tighter lg:text-8xl "
               >
                 Rabin Poudel
               </motion.h2>
-              <span className="text-xs px-2 text-stone-600">Exploring </span>
-              <span className="px-2">
+              <span className="px-2"> <span className="text-stone-500">I am a </span> 
                 <TypeAnimation
                   sequence={[
-                    "AI / ML",
+                    " Data Science Enthusiast",
                     1500, // Show for 1.5 seconds
                     "",
-                    500, // Erase
-                    "Data Science",
-                    1500,
-                    "",
-                    500,
-                    "Deep Learning",
-                    1500,
-                    "",
-                    500,
-                    ,
-                    "Generative AI",
-                    1500,
-                    "",
-                    500,
-                    "Natural Language Processing(NLP)",
-                    1500,
+                    100,
                   ]}
                   wrapper="span"
                   speed={50} // Typing speed
@@ -86,7 +70,7 @@ const Hero = () => {
 
               <motion.p
                 variants={childVarients}
-                className="my-2  max-w-lg py-6  text-xl leading-relaxed tracking-tighter"
+                className="my-2  max-w-lg py-9  text-xl leading-relaxed tracking-tighter"
               >
                 {HERO_CONTENT}
               </motion.p>

@@ -23,8 +23,8 @@ function App() {
           <Hero />
           <Technologies />
           {/* <Projects /> */}
-          {/* <Experience />
-          <Contact /> */}
+          {/* <Experience />*/}
+          {/* <Contact />  */}
         </div>
       </div>
     </>
