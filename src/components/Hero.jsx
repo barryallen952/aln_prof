@@ -24,7 +24,7 @@ const childVarients = {
 const Hero = () => {
   return (
     <>
-      <div className="pb-4 lg:mb-36 " id="hero">
+      <div className="pb-4 lg:mb-46 " id="hero">
         <div className="flex flex-wrap lg:flex-row-reverse">
           <div className="w-full lg:w-1/2">
             <div className="flex justify-center lg:p-8">
@@ -49,15 +49,17 @@ const Hero = () => {
             >
               <motion.h2
                 variants={childVarients}
-                className="pb-2 text-4xl tracking-tighter lg:text-8xl "
+                className="pb-2 text-4xl tracking-tighter lg:text-8xl font-montserrat"
               >
                 Rabin Poudel
               </motion.h2>
-              <span className="px-2"> <span className="text-stone-500">I am a </span> 
+              <span className="px-2"> <span className="text-stone-500">I </span> 
                 <TypeAnimation
                   sequence={[
-                    " Data Science Enthusiast",
-                    1500, // Show for 1.5 seconds
+                    " am a  Data Science Enthusiast.",
+                    2500, // Show for 1.5 seconds
+                    " transform data into intelligent solution.",
+                    2500, // Show for 1.5 seconds
                     "",
                     100,
                   ]}

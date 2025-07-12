@@ -22,7 +22,6 @@ const childVarients = {
   },
 };
 
-// Define roles with taglines
 const roles = [
   { title: "AI / ML", tagline: "Building powerful models with XGBoost and beyond." },
   { title: "Data Science", tagline: "Uncovering insights with Pandas and EDA." },
@@ -69,11 +68,11 @@ const Hero = () => {
             >
               <motion.h2
                 variants={childVarients}
-                className="pb-2 text-4xl tracking-tighter lg:text-8xl"
+                className="pb-2 text-4xl tracking-tighter lg:text-8xl font-montserrat"
               >
                 Rabin Poudel
               </motion.h2>
-              <span className="text-xs px-2 text-stone-600">Exploring</span>
+            
               <span className="px-2">
                 <TypeAnimation
                   sequence={roles.flatMap((role) => [
@@ -103,7 +102,7 @@ const Hero = () => {
               </AnimatePresence>
               <motion.p
                 variants={childVarients}
-                className="my-2 max-w-lg py-6 text-xl leading-relaxed tracking-tighter"
+                className="my-2 max-w-lg py-6 text-xl leading-relaxed tracking-tighter font-montserrat"
               >
                 {HERO_CONTENT}
               </motion.p>

@@ -26,7 +26,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
-            <FaLinkedin className="text-blue-400" />
+            <FaLinkedin className="text-blue-400 " />
           </a>
           <a
             href="https://www.github.com/rabin20-04"

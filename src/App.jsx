@@ -5,8 +5,16 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Technologies from "./components/Technologies";
 import Projects from "./components/Projects";
-import Experience from "./components/Experience";
+import Experience from "./components/ResumeSection";
 import Contact from "./components/Contact";
+import '@fontsource/roboto';
+import '@fontsource/montserrat';
+import '@fontsource/poppins';
+import '@fontsource/inter';
+import '@fontsource/lato';
+import About from "./components/About";
+import Skills from "./components/Skills";
+
 
 function App() {
   return (
@@ -22,9 +30,10 @@ function App() {
           <Navbar />
           <Hero />
           <Technologies />
-          {/* <Projects /> */}
-          {/* <Experience />*/}
-          {/* <Contact />  */}
+          {/* <Skills /> */}
+          <Projects />
+          <Experience />
+          <Contact /> 
         </div>
       </div>
     </>
