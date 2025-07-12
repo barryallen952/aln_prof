@@ -27,12 +27,12 @@ export const technologies = [
     color: "text-blue-900",
   },
 
-  {
-    name: "TensorFlow",
-    icon: SiTensorflow,
-    link: "https://www.tensorflow.org/",
-    color: "text-orange-600",
-  },
+  // {
+  //   name: "TensorFlow",
+  //   icon: SiTensorflow,
+  //   link: "https://www.tensorflow.org/",
+  //   color: "text-orange-600",
+  // },
   {
     name: "PyTorch",
     icon: SiPytorch,

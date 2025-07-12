@@ -77,7 +77,7 @@ const Contact = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Let's{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Connect
             </span>
           </h2>

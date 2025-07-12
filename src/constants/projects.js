@@ -20,20 +20,20 @@ export const projects = [
   {
     title: "Olympics Data analysis",
     description:
-      "Analyzed Olympic trends with data wrangling and visualization using smart maskingwrangling and visualization using smart maskingwrangling and visualization using smart masking techniques.",
+      "Analyzed Olympic trends with data wrangling and visualization using smart masking techniques.",
     tags: ["Streamlit", "Pandas", "Numpy", "Data Wrangling"],
     image:
       "https://res.cloudinary.com/dz4tg6vyg/image/upload/v1752171316/Screenshot_2025-07-10_at_11.59.18_PM_eg6wio.png",
     link: "https://olympicsdata-analysisweb-app-c6gn3w8qdajvuzwjteng7x.streamlit.app/",
+    alts: "../src/assets/ecommerce_react.png",
   },
   {
     title: "Ecommerece Website",
     description:
-      "Built and deployed a full-stack E-commerce website using FastAPI and React, with API integration, category-based features, and end-to-end deployment on Render and Vercel.",
+      "Built an E-commerce website using FastAPI and React, with API integration, category-based features, and deployed on Render and Vercel.",
     tags: ["FastApi", "React", "Render", "Vercel"],
     image:
       "https://res.cloudinary.com/dz4tg6vyg/image/upload/v1752169935/Screenshot_2025-07-10_at_11.36.54_PM_uvicls.png",
-      link: "https://react-fast-api.vercel.app/",
-    
+    link: "https://react-fast-api.vercel.app/",
   },
 ];

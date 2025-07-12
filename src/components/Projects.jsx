@@ -54,7 +54,7 @@ const ProjectsSection = () => {
             <p className="text-lg text-gray-900 dark:text-gray-300">
               Explore some of my recent work in machine learning,
               showcasing practical applications and innovative solutions to
-              complex problems.
+              various problems.
             </p>
           </div>
         </div>
