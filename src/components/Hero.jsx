@@ -1,5 +1,8 @@
 import React from "react";
-import profile_pic from "../assets/profileee.png";
+// import profile_pic from "../assets/profile-pic.png";
+// import profile_pic from "../assets/profile-pic (1).png";
+import profile_pic from "../assets/heroimg.png";
+// import profile_pic from "../assets/profileee.png";
 import { HERO_CONTENT } from "../constants/index.js";
 import { animate, motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -27,13 +30,13 @@ const Hero = () => {
       <div className="pb-4 lg:mb-46 " id="hero">
         <div className="flex flex-wrap lg:flex-row-reverse">
           <div className="w-full lg:w-1/2">
-            <div className="flex justify-center lg:p-8">
+            <div className="flex justify-center lg:pt-16">
               <motion.img
                 src={profile_pic}
                 alt=" Profile Image"
                 className=" shadow-2xl rounded-3xl"
-                height={650}
-                width={650}
+                height={550}
+                width={500}
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 1 }}
