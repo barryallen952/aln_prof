@@ -138,36 +138,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <hr className="border-t border-white/20 w-full max-w-6xl mx-auto mt-12" />
-      <footer className="container mx-auto max-w-6xl px-6 pb-6 flex flex-col md:flex-row justify-between items-center bg-black/10 mt-5">
-        <p className="text-slate-400 text-sm">© 2024 Rabin Poudel.</p>
-        <div className="flex items-center justify-center gap-4 text-2xl py-4">
-          <a
-            href="https://www.linkedin.com/in/rabin-poudel-770842277"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedin className="" />
-          </a>
-          <a
-            href="https://www.github.com/rabin20-04"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Github"
-          >
-            <FaGithub className="text-white" />
-          </a>
-          <a
-            href="https://x.com/PoudelRabin5824?s=09"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-          >
-            <FaTwitter className="" />
-          </a>
-        </div>
-      </footer>
+     
     </section>
   );
 };
