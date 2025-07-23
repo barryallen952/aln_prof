@@ -30,7 +30,7 @@ export const resumeData = {
       organization: "Association of Computer Engineering (ACES), IOEPC",
       description:
         "Worked with driven minds, honed leadership and teamwork skills, and gained hands-on experience in events management and mentorship at ACES.",
-      logo: "src/assets/306272669_399023282403607_3225461323499728368_n.jpg",
+      logo: "https://res.cloudinary.com/dz4tg6vyg/image/upload/v1753242097/logo_dtg7t8.png",
       link:"https://www.linkedin.com/company/acesioe-pc"
     },
   ],

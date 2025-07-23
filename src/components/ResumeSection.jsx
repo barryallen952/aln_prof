@@ -167,7 +167,7 @@ const ResumeSection = () => {
                       <img
                         src={exp.logo}
                         alt={`${exp.organization} logo`}
-                        className="w-12 h-12 rounded-full object-cover border-2 border-purple-500"
+                        className="w-12 h-12 rounded-full object-cover border-2 border-purple-500 "
                       />
                     </a>
                     <div>
