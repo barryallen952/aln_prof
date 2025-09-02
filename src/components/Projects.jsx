@@ -52,9 +52,7 @@ const ProjectsSection = () => {
               Featured Projects
             </h2>
             <p className="text-lg text-gray-900 dark:text-gray-300">
-              Explore some of my recent work in machine learning,
-              showcasing practical applications and innovative solutions to
-              various problems.
+              Explore some of my recent work in machine learning.
             </p>
           </div>
         </div>
@@ -150,7 +148,7 @@ const ProjectsSection = () => {
           )}
         >
           <a
-            href="https://github.com/rabin20-04"
+            href="https://github.com/rabinverse"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center text-lg font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"

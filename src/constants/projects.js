@@ -28,7 +28,7 @@ export const projects = [
     alts: "../src/assets/ecommerce_react.png",
   },
   {
-    title: "Ecommerece Website",
+    title: "Ecommerce Website",
     description:
       "Built an E-commerce website using FastAPI and React, with API integration, category-based features, and deployed on Render and Vercel.",
     tags: ["FastApi", "React", "Render", "Vercel"],

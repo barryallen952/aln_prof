@@ -54,7 +54,7 @@ const Hero = () => {
                 variants={childVarients}
                 className="pb-2 text-4xl tracking-tighter lg:text-8xl font-montserrat"
               >
-                Rabin Poudel
+               Rabin Poudel
               </motion.h2>
               <span className="px-2"> <span className="text-stone-500">I </span> 
                 <TypeAnimation
@@ -77,7 +77,7 @@ const Hero = () => {
                 variants={childVarients}
                 className="my-2  max-w-lg py-9  text-xl leading-relaxed tracking-tighter"
               >
-                {HERO_CONTENT}
+                Hi, {HERO_CONTENT}
               </motion.p>
               <motion.a
                 variants={childVarients}
