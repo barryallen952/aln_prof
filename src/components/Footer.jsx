@@ -10,7 +10,7 @@ const Footer = () => {
       <p className="text-slate-400 text-sm">© 2024 Rabin Poudel.</p>
       <div className="flex items-center justify-center gap-4 text-2xl py-4">
         <a
-          href="https://www.linkedin.com/in/rabin-poudel-770842277"
+          href="https://www.linkedin.com/in/rabin-poudel"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
@@ -18,7 +18,7 @@ const Footer = () => {
           <FaLinkedin className="text-white hover:text-blue-400 transition-colors" />
         </a>
         <a
-          href="https://www.github.com/rabin20-04"
+          href="https://www.github.com/rabinverse"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Github"
