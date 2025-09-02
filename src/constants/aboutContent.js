@@ -4,6 +4,6 @@ export const bioContent = {
 };
 
 export const ctaContent = {
-  text: "Excited about pushing the boundaries of AI and ML to create innovative solutions. Let's connect to explore opportunities or collaborate on impactful projects!",
+  text: "Excited about pushing the boundaries of AI and ML to create innovative solutions. Let's connect to collaborate on impactful projects!",
   buttonText: "Get in Touch"
 };

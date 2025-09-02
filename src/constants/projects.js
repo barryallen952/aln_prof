@@ -15,7 +15,7 @@ export const projects = [
       "Built an ML model to classify human activities using accelerometer and gyroscope readings from smartphone.",
     tags: ["Boosting", "GridSearchCV", "RandomSearchCV", "Bagging"],
     image: "https://micro.ai/wp-content/uploads/2020/09/har.jpg",
-    link: "https://github.com/rabin20-04/human_activity_recognition",
+    link: "https://github.com/rabinverse/human_activity_recognition",
   },
   {
     title: "Olympics Data analysis",

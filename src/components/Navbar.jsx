@@ -21,7 +21,7 @@ const Navbar = () => {
         {/* -------------------        -------------------- */}
         <div className="m-8 flex  items-center justify-center gap-4 text-2xl">
           <a
-            href="https://www.linkedin.com/in/rabin-poudel-770842277"
+            href="https://www.linkedin.com/in/rabin-poudel"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -29,7 +29,7 @@ const Navbar = () => {
             <FaLinkedin className="text-blue-400 " />
           </a>
           <a
-            href="https://www.github.com/rabin20-04"
+            href="https://www.github.com/rabinverse"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Github"
