@@ -1,2 +1,2 @@
-
-export const HERO_CONTENT = `Driven by a simple question: How can AI make this better? I build machine learning solutions that answer it.`;
+export const HERO_CONTENT = ` How can AI make this better? `;
+export const HERO_CONTENT_ANS = `I build machine learning solutions that answer it.`;

@@ -77,7 +77,7 @@ const Contact = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Let's{" "}
-            <span className="bg-gradient-to-b from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-blue-400 to-blue-600 bg-clip-text text-transparent">
               Connect
             </span>
           </h2>
@@ -119,7 +119,7 @@ const Contact = () => {
               />
               <button
                 onClick={handleSubmit}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium py-2 rounded-md transition-all duration-300"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-900 hover:from-blue-600 hover:to-blue-900 text-white font-medium py-2 rounded-md transition-all duration-300"
               >
                 Send Message
               </button>

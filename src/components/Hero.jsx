@@ -4,6 +4,7 @@ import React from "react";
 import profile_pic from "../assets/heroimg.png";
 // import profile_pic from "../assets/profileee.png";
 import { HERO_CONTENT } from "../constants/index.js";
+import { HERO_CONTENT_ANS } from "../constants/index.js";
 import { animate, motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import resume from "../assets/Rabin-Poudel-cv.pdf";
@@ -54,9 +55,11 @@ const Hero = () => {
                 variants={childVarients}
                 className="pb-2 text-4xl tracking-tighter lg:text-8xl font-montserrat"
               >
-               Rabin Poudel
+                Rabin Poudel
               </motion.h2>
-              <span className="px-2"> <span className="text-stone-500">I </span> 
+              <span className="px-2">
+                {" "}
+                <span className="text-stone-500">I </span>
                 <TypeAnimation
                   sequence={[
                     " work with data.",
@@ -77,7 +80,16 @@ const Hero = () => {
                 variants={childVarients}
                 className="my-2  max-w-lg py-9  text-xl leading-relaxed tracking-tighter"
               >
-                Hi, {HERO_CONTENT}
+                <p className="text-teal-500" style={{ whiteSpace: "pre-line" }}>
+                  Driven by a simple question:
+                </p>
+                <p className="text-stone-400" style={{ whiteSpace: "pre-line" }}>{HERO_CONTENT}</p>
+                <p
+                  className="relative inline-block border-b-2 border-cyan-400 after:content-[''] after:absolute after:left-0 after:-bottom-[6px] after:w-full after:h-[2px] after:bg-cyan-400 after:blur-md after:opacity-70"
+                  style={{ whiteSpace: "pre-line" }}
+                >
+                  {HERO_CONTENT_ANS}
+                </p>
               </motion.p>
               <motion.a
                 variants={childVarients}
