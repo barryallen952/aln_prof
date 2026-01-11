@@ -6,7 +6,7 @@ import profile_pic from "../assets/heroimg.png";
 import { HERO_CONTENT } from "../constants/index.js";
 import { animate, motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import resume from "../assets/Rabin_Poudel_cv.pdf";
+import resume from "../assets/Rabin-Poudel-cv.pdf";
 const containerVarients = {
   hidden: { opacity: 0, x: -100 },
   visible: {
@@ -59,9 +59,9 @@ const Hero = () => {
               <span className="px-2"> <span className="text-stone-500">I </span> 
                 <TypeAnimation
                   sequence={[
-                    " am a  Data Science Enthusiast.",
+                    " work with data.",
                     2500, // Show for 1.5 seconds
-                    " transform data into intelligent solution.",
+                    " create systems that learn.",
                     2500, // Show for 1.5 seconds
                     "",
                     100,

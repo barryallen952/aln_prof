@@ -1,5 +1,15 @@
 export const projects = [
   {
+    title: "Music Recommender",
+    description:
+      "A machine learning based music recommendation system that implements content-based filtering, collaborative filtering, and hybrid recommendation approaches to deliver personalized music suggestions.",
+    tags: ["Stacking Model", "Dask", "Optuna", "Random Forest"],
+    image:
+      "https://repository-images.githubusercontent.com/481851510/24e876a4-5f85-4c10-8b12-7638b49d6179",
+    link: "the-musicrecommender.streamlit.app/",
+    blog: "https://medium.com/@poudelrabin2004/building-a-music-recommender-system-why-recommendation-systems-are-essential-d83e888af29b",
+  },
+  {
     title: "Delivery Time Prediction",
     description:
       "Built an Machine learning Algorithm that predicts Food delivery time in minutes.",

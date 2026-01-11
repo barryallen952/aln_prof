@@ -1,2 +1,2 @@
 
-export const HERO_CONTENT = `I am an AI and ML learner, actively developing projects and building solutions. I enjoy solving real-world problems using machine learning and artificial intelligence techniques.`;
+export const HERO_CONTENT = `Driven by a simple question: How can AI make this better? I build machine learning solutions that answer it.`;
