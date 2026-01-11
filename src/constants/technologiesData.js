@@ -10,7 +10,7 @@ import {
   SiJupyter,
   SiScikitlearn,
   SiPandas,
-  SiFlask,
+  SiFlask,SiMlflow,SiDvc,SiLangchain
 } from "react-icons/si";
 
 export const technologies = [
@@ -37,6 +37,25 @@ export const technologies = [
     name: "PyTorch",
     icon: SiPytorch,
     link: "https://pytorch.org/",
+    color: "text-red-600",
+  },
+  {
+    name: "Langchain",
+    icon: SiLangchain,
+    link: "https://www.langchain.com/",
+    color: "text-red-600",
+  },
+ 
+  {
+    name: "Mlflow",
+    icon: SiMlflow,
+    link: "https://mlflow.org/",
+    color: "text-red-600",
+  },
+  {
+    name: "Dvc",
+    icon: SiDvc,
+    link: "https://dvc.org/",
     color: "text-red-600",
   },
   {
