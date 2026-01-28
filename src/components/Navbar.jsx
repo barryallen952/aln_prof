@@ -1,5 +1,6 @@
 import React from "react";
 import Home_Logo from "../assets/logo.jpg";
+import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaSnapchat, FaTwitter } from "react-icons/fa";
 const Navbar = () => {
   return (
@@ -28,14 +29,19 @@ const Navbar = () => {
           >
             <FaLinkedin className="text-blue-400 " />
           </a>
-          <a
+
+          <motion.a
             href="https://www.github.com/rabinverse"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Github"
+            className="relative"
+            animate={{ y: [0, -4, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <FaGithub />
-          </a>
+            <FaGithub className=" drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300" />
+          </motion.a>
+
           <a
             href="https://x.com/PoudelRabin5824?s=09"
             target="_blank"

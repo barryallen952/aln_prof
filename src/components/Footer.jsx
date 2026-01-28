@@ -7,6 +7,7 @@ const Footer = () => {
     <div>
         <hr className="border-t border-white/20 w-full max-w-12xl mx-auto mt-12" />
     <footer className="container mx-auto max-w-8xl px-6 pb-6 flex flex-col md:flex-row justify-between items-center mt-5">
+      
       <p className="text-slate-400 text-sm">© 2024 Rabin Poudel.</p>
       <div className="flex items-center justify-center gap-4 text-2xl py-4">
         <a

@@ -74,22 +74,30 @@ const Technologies = () => {
         animate={sectionInView ? "visible" : "hidden"}
       >
         {technologies.map((tech, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            className="p-4"
-          >
-            <a
-              href={tech.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <motion.div
-                animate="animate"
-                variants={iconVariants(2 + (index % 3))}
-              >
-                <tech.icon className={`text-4xl ${tech.color}`} />
-              </motion.div>
+          <motion.div key={index} variants={itemVariants} className="p-4">
+            <a href={tech.link} target="_blank" rel="noopener noreferrer">
+              <div className="relative flex flex-col items-center group">
+                {/* Hover name */}
+                <span className="absolute -top-11 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200 ">
+                  {tech.name ?? ""}
+                </span>
+
+                {/* Icon or image */}
+                <motion.div
+                  animate="animate"
+                  variants={iconVariants(2 + (index % 3))}
+                >
+                  {tech.icon ? (
+                    <tech.icon className={`text-4xl ${tech.color ?? ""}`} />
+                  ) : (
+                    <img
+                      src={tech.iconLink}
+                      alt={tech.IconName}
+                      className="w-25 h-25 rounded object-contain"
+                    />
+                  )}
+                </motion.div>
+              </div>
             </a>
           </motion.div>
         ))}
