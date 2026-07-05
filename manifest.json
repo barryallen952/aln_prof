@@ -1,0 +1,16 @@
+{
+  "name": "Rabin Poudel - AI/ML Engineer",
+  "short_name": "Rabin Poudel",
+  "description": "Portfolio of Rabin Poudel, an AI/ML Engineer and NLP Practitioner from Nepal.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dz4tg6vyg/image/upload/v1747036072/logo-removebg-preview-modified_bwueyx.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
