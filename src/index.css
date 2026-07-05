@@ -1,3 +1,102 @@
-
-
 @import "tailwindcss";
+
+/* Claude-like warm display serif */
+.font-display {
+  font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+/* Rendered Markdown for blog posts */
+.blog-content {
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+.blog-content > * + * {
+  margin-top: 1.25rem;
+}
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+  font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
+  color: #f1f5f9;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 2.5rem;
+  letter-spacing: -0.01em;
+}
+.blog-content h1 {
+  font-size: 1.9rem;
+}
+.blog-content h2 {
+  font-size: 1.5rem;
+}
+.blog-content h3 {
+  font-size: 1.2rem;
+}
+.blog-content a {
+  color: #a5b4fc;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(99, 102, 241, 0.4);
+}
+.blog-content a:hover {
+  color: #c7d2fe;
+}
+.blog-content strong {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.4rem;
+}
+.blog-content ul {
+  list-style: disc;
+}
+.blog-content ol {
+  list-style: decimal;
+}
+.blog-content li + li {
+  margin-top: 0.5rem;
+}
+.blog-content li::marker {
+  color: #6366f1;
+}
+.blog-content blockquote {
+  border-left: 2px solid rgba(99, 102, 241, 0.5);
+  padding-left: 1.1rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+.blog-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: #1e293b;
+  color: #a5b4fc;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+.blog-content pre {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+.blog-content pre code {
+  background: transparent;
+  color: #cbd5e1;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.blog-content img {
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+}
+.blog-content hr {
+  border: none;
+  border-top: 1px solid #1e293b;
+  margin: 2.5rem 0;
+}

@@ -1,142 +1,165 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { technologies } from "../constants/technologiesData";
+import { techDomains } from "../constants/technologiesData";
 
-const LevelBar = ({ level }) => (
-  <div className="flex flex-col items-center gap-0.5 w-full">
-    <div className="flex items-center gap-[3px]">
-      {Array.from({ length: 10 }).map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scaleY: 0 }}
-          animate={{ opacity: 1, scaleY: 1 }}
-          transition={{ duration: 0.2, delay: i * 0.04 }}
-          className={`w-[4px] h-[10px] rounded-sm ${
-            i < level
-              ? "bg-indigo-400 shadow-[0_0_4px_rgba(99,102,241,0.8)]"
-              : "bg-slate-700"
-          }`}
-        />
-      ))}
-    </div>
-  </div>
-);
+const allTechs = techDomains.flatMap((d) => d.technologies);
 
-const NodeItem = ({
-  tech,
-  globalIndex,
-  isActive,
-  sectionInView,
-  onEnter,
-  onLeave,
-}) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={
-      sectionInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-    }
-    transition={{ duration: 0.4, delay: globalIndex * 0.05 }}
-    className="flex flex-col items-center gap-4"
-    style={{ width: "80px" }}
+// Bento spans per domain — sized by node count so everything fits one screen.
+const cellSpan = {
+  genai: "sm:col-span-2 lg:col-span-4",
+  datastores: "lg:col-span-2",
+  ml: "lg:col-span-2",
+  mlops: "lg:col-span-2",
+  web: "lg:col-span-2",
+};
+
+// Offsets into the flat tech list so hover/auto-cycle share one active index.
+const domainOffsets = techDomains.reduce((acc, domain, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + techDomains[i - 1].technologies.length);
+  return acc;
+}, []);
+
+// Proficiency ring: conic arc around the node, filled to level/10.
+const ring = (level, active = false) => ({
+  background: `conic-gradient(from 0deg, rgba(129,140,248,${active ? 1 : 0.7}) ${
+    (level ?? 0) * 36
+  }deg, rgba(51,65,85,0.45) ${(level ?? 0) * 36}deg)`,
+});
+
+const Node = ({ tech, index, globalIndex, isActive, onEnter, onLeave }) => (
+  <motion.a
+    href={tech.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, scale: 0.6 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{
+      duration: 0.4,
+      delay: index * 0.04,
+      type: "spring",
+      stiffness: 200,
+      damping: 15,
+    }}
+    className="group flex flex-col items-center gap-1.5 w-16"
     onMouseEnter={() => onEnter(globalIndex)}
     onMouseLeave={onLeave}
   >
-    {/* Node */}
-    <div className="relative w-16 h-16 sm:w-20 sm:h-20 cursor-pointer flex-shrink-0">
-      <a
-        href={tech.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full h-full outline-none"
+    <div className="relative">
+      {/* Spinning dashed ring when active */}
+      <div
+        className={`absolute inset-[-6px] rounded-full border border-dashed animate-[spin_10s_linear_infinite] transition-colors duration-500 pointer-events-none ${
+          isActive ? "border-indigo-500/70" : "border-transparent"
+        }`}
+      />
+      {/* Ping pulse when active */}
+      {isActive && (
+        <div className="absolute inset-[-3px] rounded-full border border-indigo-400/40 animate-ping pointer-events-none" />
+      )}
+
+      <div
+        className={`rounded-full p-[2.5px] transition-all duration-300 ${
+          isActive
+            ? "scale-110 shadow-[0_0_18px_rgba(99,102,241,0.55)]"
+            : "scale-100"
+        }`}
+        style={ring(tech.level, isActive)}
       >
-        {/* Outer glowing ring */}
-        <div
-          className={`absolute inset-0 rounded-full border-2 transition-all duration-500 pointer-events-none ${
-            isActive
-              ? "border-indigo-400/60 scale-125"
-              : "border-indigo-500/10 scale-100"
-          }`}
-        />
-
-        {/* Spinning dashed ring */}
-        <div
-          className={`absolute inset-[-10px] rounded-full border border-dashed animate-[spin_10s_linear_infinite] transition-colors duration-500 pointer-events-none ${
-            isActive ? "border-indigo-500/70" : "border-slate-700/25"
-          }`}
-        />
-
-        {/* Ping pulse when active */}
-        {isActive && (
-          <div className="absolute inset-[-4px] rounded-full border border-indigo-400/40 animate-ping pointer-events-none" />
-        )}
-
-        {/* Main Node */}
-        <div
-          className={`relative w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden z-10 transition-all duration-300 ${
-            isActive
-              ? "border border-indigo-400 shadow-[0_0_24px_rgba(99,102,241,0.6)]"
-              : "border border-slate-800 shadow-[0_0_8px_rgba(0,0,0,0.4)]"
-          }`}
-        >
-          <div
-            className={`absolute inset-0 transition-opacity duration-300 pointer-events-none bg-indigo-500/20 ${
-              isActive ? "opacity-100" : "opacity-0"
-            }`}
-          />
-
-          <div
-            className={`transition-all duration-300 relative z-20 ${
-              isActive ? "grayscale-0 scale-110" : "grayscale-[70%] scale-100"
+        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-slate-950 flex items-center justify-center overflow-hidden">
+          <span
+            className={`flex items-center justify-center transition-all duration-300 ${
+              isActive ? "grayscale-0 opacity-100" : "grayscale-[50%] opacity-95"
             }`}
           >
             {tech.icon ? (
               <tech.icon
-                className={`text-3xl sm:text-4xl ${tech.color ?? "text-slate-400"}`}
+                className={`text-xl sm:text-2xl ${tech.color ?? "text-slate-400"}`}
               />
             ) : (
               <img
                 src={tech.iconLink}
                 alt={tech.IconName}
-                className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
+                className="w-6 h-6 sm:w-7 sm:h-7 object-contain rounded-full"
               />
             )}
-          </div>
+          </span>
         </div>
-      </a>
+      </div>
     </div>
 
-    {/* Label + level bar — fixed height */}
-    <div className="flex flex-col items-center h-12 justify-start gap-1.5">
-      <span
-        className={`font-mono text-[9px] sm:text-[10px] tracking-widest uppercase transition-colors duration-300 ${
-          isActive ? "text-indigo-300" : "text-indigo-600"
-        }`}
-      >
-        {tech.IconName ?? tech.name}
-      </span>
+    <span
+      className={`text-[8px] sm:text-[9px] uppercase tracking-wider text-center leading-tight transition-colors duration-300 ${
+        isActive ? "text-indigo-300" : "text-slate-500"
+      }`}
+    >
+      {tech.IconName}
+    </span>
+  </motion.a>
+);
 
-      <div
-        className={`transition-all duration-300 ${isActive ? "opacity-100" : "opacity-40"}`}
-      >
-        {tech.level != null && <LevelBar level={tech.level} />}
+const DomainCell = ({
+  domain,
+  index,
+  activeIndex,
+  onEnter,
+  onLeave,
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.5, delay: index * 0.08 }}
+    className={`relative border border-slate-800/70 bg-slate-950/60 hover:border-indigo-500/40 transition-colors duration-500 p-4 flex flex-col ${
+      cellSpan[domain.id] ?? ""
+    }`}
+  >
+    {/* Corner tick */}
+    <div className="absolute -top-px -left-px w-3 h-3 border-t border-l border-indigo-500/70" />
+
+    <div className="flex items-baseline justify-between gap-2 mb-4">
+      <div className="flex items-baseline gap-2 min-w-0">
+        <span className="text-indigo-500/60 text-[9px] shrink-0">
+          /{String(index + 1).padStart(2, "0")}
+        </span>
+        <h3
+          className="text-slate-200 text-xs sm:text-sm font-bold font-sans tracking-tight truncate"
+          title={domain.caption}
+        >
+          {domain.title}
+        </h3>
       </div>
+      <span className="text-[8px] text-slate-600 uppercase tracking-widest shrink-0">
+        {domain.technologies.length}x
+      </span>
+    </div>
+
+    <div className="flex flex-wrap gap-x-3 gap-y-3 justify-center content-center flex-1">
+      {domain.technologies.map((tech, i) => {
+        const globalIndex = domainOffsets[index] + i;
+        return (
+          <Node
+            key={tech.IconName}
+            tech={tech}
+            index={i}
+            globalIndex={globalIndex}
+            isActive={activeIndex === globalIndex}
+            onEnter={onEnter}
+            onLeave={onLeave}
+          />
+        );
+      })}
     </div>
   </motion.div>
 );
 
 const Technologies = () => {
-  const [sectionRef, sectionInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isUserHovering, setIsUserHovering] = useState(false);
 
   useEffect(() => {
     if (isUserHovering) return;
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % technologies.length);
+      setActiveIndex((prev) => (prev + 1) % allTechs.length);
     }, 1200);
     return () => clearInterval(interval);
   }, [isUserHovering]);
@@ -151,47 +174,44 @@ const Technologies = () => {
   }, []);
 
   return (
-    <div className="py-32 relative font-mono overflow-hidden" id="technologies">
-      <div className="hidden lg:block absolute inset-0 pointer-events-none opacity-20 z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px]" />
-      </div>
-
-      <motion.div
-        className="text-center mb-20 relative z-20"
-        ref={sectionRef}
-        initial={{ opacity: 0, y: -30 }}
-        animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="inline-flex items-center gap-4 mb-4">
-          <div className="h-px w-12 bg-indigo-500/50" />
-          <h2 className="text-xs text-indigo-400 uppercase tracking-[0.3em] font-bold">
+    <section
+      id="technologies"
+      className="relative font-mono py-24 lg:py-0 lg:min-h-screen lg:flex lg:items-center"
+    >
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-8"
+        >
+          <div className="flex items-center gap-2 text-indigo-500 text-[10px] tracking-widest uppercase mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping" />
             model.architecture()
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-200 font-sans">
+            Skills & Technologies
           </h2>
-          <div className="h-px w-12 bg-indigo-500/50" />
-        </div>
-        <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-200 font-sans">
-          Technology Graph
-        </h2>
-      </motion.div>
+          <p className="text-slate-500 text-sm mt-3">
+            <span className="text-indigo-400">$</span> The tech stack powering my builds.
+          </p>
+        </motion.div>
 
-      <div className="max-w-5xl mx-auto px-6 sm:px-12 relative z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[80px] pointer-events-none -z-10" />
-        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-x-8 gap-y-10 justify-items-center items-start">
-          {technologies.map((tech, index) => (
-            <NodeItem
-              key={index}
-              tech={tech}
-              globalIndex={index}
-              isActive={activeIndex === index}
-              sectionInView={sectionInView}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+          {techDomains.map((domain, index) => (
+            <DomainCell
+              key={domain.id}
+              domain={domain}
+              index={index}
+              activeIndex={activeIndex}
               onEnter={handleEnter}
               onLeave={handleLeave}
             />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

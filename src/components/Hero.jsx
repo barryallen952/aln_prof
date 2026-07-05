@@ -22,7 +22,7 @@ const childVarients = {
 
 const ScrollIndicator = () => (
   <motion.div
-    className="absolute mt-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0"
+    className="absolute mt-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ delay: 1.5, duration: 0.8 }}
@@ -126,17 +126,17 @@ const Hero = () => {
 
             <motion.h1
               variants={childVarients}
-              className="pb-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-200"
+              className="font-display pb-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-200"
             >
               <span className="relative inline-block group mt-6">
                 Rabin
-                <span className="absolute -top-5 left-0 text-[10px] bg-indigo-500/20 text-indigo-300 px-1 border border-indigo-500/50 rounded-sm uppercase tracking-wider">
+                <span className="font-mono absolute -top-5 left-0 text-[10px] bg-indigo-500/20 text-indigo-300 px-1 border border-indigo-500/50 rounded-sm uppercase tracking-wider">
                   B-PER
                 </span>
               </span>{" "}
               <span className="relative inline-block group mt-6">
                 Poudel
-                <span className="absolute -top-5 left-0 text-[10px] bg-indigo-500/20 text-indigo-300 px-1 border border-indigo-500/50 rounded-sm uppercase tracking-wider">
+                <span className="font-mono absolute -top-5 left-0 text-[10px] bg-indigo-500/20 text-indigo-300 px-1 border border-indigo-500/50 rounded-sm uppercase tracking-wider">
                   I-PER
                 </span>
               </span>
@@ -200,29 +200,46 @@ const Hero = () => {
               </div>
             </motion.div>
 
-            <motion.a
+            <motion.div
               variants={childVarients}
-              href="https://drive.google.com/file/d/1lHKmEiQo-mSIvNXfegg4Fo0gIhw3BY9h/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 bg-slate-900 border border-slate-700 hover:border-indigo-500 px-6 py-3 text-xs text-slate-300 transition-colors"
+              className="flex items-center gap-4"
             >
-              <span className="text-indigo-400 font-bold">GET</span>
-              <span>CV</span>
-              <svg
-                className="w-4 h-4 ml-2 text-slate-500 group-hover:text-indigo-400 transition-colors"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <a
+                href="https://drive.google.com/file/d/1lHKmEiQo-mSIvNXfegg4Fo0gIhw3BY9h/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 bg-slate-900 border border-slate-700 hover:border-indigo-500 px-6 py-3 text-xs text-slate-300 transition-colors"
               >
-                <path
-                  strokeLinecap="square"
-                  strokeLinejoin="miter"
-                  strokeWidth={2}
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                />
-              </svg>
-            </motion.a>
+                <span className="text-indigo-400 font-bold">GET</span>
+                <span>CV</span>
+                <svg
+                  className="w-4 h-4 ml-2 text-slate-500 group-hover:text-indigo-400 transition-colors"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+              </a>
+
+              <button
+                onClick={() => {
+                  const el = document.getElementById("projects");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group flex items-center gap-2 bg-indigo-500 hover:bg-indigo-400 text-slate-950 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
+              >
+                View Work
+                <span className="group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+              </button>
+            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -1,6 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Send, Terminal, Loader2 } from "lucide-react";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SEND_COOLDOWN_MS = 30_000;
+
+const MESSAGE_PHRASES = [
+  "Let's build chatbot for business.",
+  "Build amazing models together.",
+  "Let's build nlp systems.",
+  "Let's find business insight in the data.",
+  "Let's collaborate.",
+];
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,14 +19,63 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState("");
+  const [lastSentAt, setLastSentAt] = useState(0);
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
+  const messageRef = useRef(null);
+
+  // Typewriter placeholder for the message field (imperative, no form re-render).
+  useEffect(() => {
+    const el = messageRef.current;
+    if (!el) return;
+    let i = 0;
+    let char = 0;
+    let deleting = false;
+    let timer;
+    const tick = () => {
+      const word = MESSAGE_PHRASES[i];
+      char += deleting ? -1 : 1;
+      el.placeholder = word.slice(0, char) + "▌";
+      if (!deleting && char === word.length) {
+        deleting = true;
+        timer = setTimeout(tick, 1800);
+      } else if (deleting && char === 0) {
+        deleting = false;
+        i = (i + 1) % MESSAGE_PHRASES.length;
+        timer = setTimeout(tick, 400);
+      } else {
+        timer = setTimeout(tick, deleting ? 30 : 60);
+      }
+    };
+    tick();
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.message) {
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const message = formData.message.trim();
+
+    if (!name || !message) {
       setStatus("Error: All fields are required to execute.");
+      return;
+    }
+    if (email && !EMAIL_RE.test(email)) {
+      setStatus("Error: Invalid email format.");
+      return;
+    }
+    if (Date.now() - lastSentAt < SEND_COOLDOWN_MS) {
+      setStatus("Error: Rate limited. Please wait a moment before resending.");
+      return;
+    }
+    // Honeypot tripped: pretend success, send nothing.
+    if (honeypot) {
+      setStatus("Success: Payload delivered securely.");
+      setFormData({ name: "", email: "", message: "" });
       return;
     }
 
@@ -26,13 +86,22 @@ const Contact = () => {
       .send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formData,
+        {
+          name,
+          email,
+          message,
+          time: new Date().toLocaleString("en-US", {
+            dateStyle: "medium",
+            timeStyle: "short",
+          }),
+        },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       )
       .then(
         () => {
           setStatus("Success: Payload delivered securely.");
           setFormData({ name: "", email: "", message: "" });
+          setLastSentAt(Date.now());
           setIsLoading(false);
           setTimeout(() => setStatus(""), 4000);
         },
@@ -43,14 +112,13 @@ const Contact = () => {
         },
       );
   };
-
   return (
     <section
-      className="pt-20 px-4 sm:px-6 pb-24 font-mono relative overflow-hidden"
+      className="pt-20 px-4 sm:px-6 pb-44 font-mono relative overflow-hidden"
       id="contact"
     >
-      {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-96 bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+      {/* Background ambient glow — full width */}
+      <div className="absolute top-1/2 inset-x-0 -translate-y-1/2 h-[28rem] bg-indigo-500/[0.07] blur-[130px] pointer-events-none -z-10" />
 
       <div className="container mx-auto max-w-3xl">
         <div className="text-center mb-14 relative z-10">
@@ -58,12 +126,13 @@ const Contact = () => {
             <Terminal className="w-4 h-4" />
             <span>POST /api/v1/contact</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 font-sans tracking-tight mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-semibold text-slate-100 tracking-tight mb-4">
             Let's Talk
+            <span className="text-indigo-500">.</span>
+            <span className="inline-block w-[3px] h-8 md:h-10 bg-indigo-400 ml-2 align-middle animate-pulse shadow-[0_0_10px_rgba(129,140,248,0.9)]" />
           </h2>
-          <p className="text-slate-400 text-sm max-w-lg mx-auto">
-            If you're looking for someone who loves solving difficult problems,
-            you're in the right place."
+          <p className="text-slate-400 text-sm max-w-lg mx-auto leading-relaxed">
+            Great things start with a simple message. Let's build together.
           </p>
           <span className="inline-flex items-center gap-2 px-3 py-1 mt-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-[11px] tracking-[0.18em] uppercase">
             <span className="w-1.5  h-1.5 rounded-full bg-indigo-400 animate-pulse" />
@@ -86,6 +155,23 @@ const Contact = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8 mt-2">
+              {/* Honeypot — hidden from humans, bots fill it */}
+              <div
+                className="absolute -left-[9999px] top-auto"
+                aria-hidden="true"
+              >
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
               <div className="relative">
                 <label className="block text-xs uppercase tracking-widest text-indigo-400/80 mb-2 font-semibold relative">
                   <span>
@@ -103,6 +189,8 @@ const Contact = () => {
                   </span>
                   <input
                     type="text"
+                    maxLength={100}
+                    required
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -130,6 +218,7 @@ const Contact = () => {
                   </span>
                   <input
                     type="email"
+                    maxLength={100}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -159,6 +248,9 @@ const Contact = () => {
                     ~{">"}
                   </span>
                   <textarea
+                    ref={messageRef}
+                    maxLength={2000}
+                    required
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
@@ -166,7 +258,6 @@ const Contact = () => {
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
                     className="w-full bg-transparent border-b border-slate-700 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-400 pl-6 py-3 min-h-[120px] resize-none transition-colors text-sm custom-scrollbar"
-                    placeholder="Your message here..."
                   />
                   {focusedField === "message" && (
                     <span className="absolute right-0 top-4 w-1.5 h-4 bg-indigo-400 animate-pulse" />

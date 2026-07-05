@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "cp dist/index.html dist/404.html",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm  run build",
@@ -14,21 +15,17 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@fontsource/inter": "^5.2.6",
-    "@fontsource/lato": "^5.2.6",
-    "@fontsource/montserrat": "^5.2.6",
-    "@fontsource/poppins": "^5.2.6",
-    "@fontsource/roboto": "^5.2.6",
+    "@fontsource-variable/fraunces": "^5.2.9",
     "@tailwindcss/vite": "^4.0.9",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.525.0",
+    "marked": "^18.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icon": "^1.0.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
+    "react-router-dom": "^7.18.1",
     "react-type-animation": "^3.2.0",
-    "react-vertical-timeline-component": "^3.5.3",
     "tailwindcss": "^4.0.9"
   },
   "devDependencies": {

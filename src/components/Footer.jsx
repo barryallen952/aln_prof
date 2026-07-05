@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+import { socials } from "../constants/index.js";
 
+const logs = [
+  "INFO: Initializing Rabin_v2.5.pt NLP model...",
+  "SUCCESS: Data pipeline optimization complete (Latency: -42%)",
+  "INFO: Deploying ML microservices via FastAPI...",
+  "SUCCESS: PyTorch tensor embeddings generated.",
+  "INFO: Running DVC pipeline...",
+  "Awaiting new data streams...",
+];
 
 const Footer = () => {
+  const sessionId = useMemo(
+    () => Math.random().toString(36).substring(2, 12).toUpperCase(),
+    [],
+  );
   const [logIndex, setLogIndex] = useState(0);
-  const logs = [
-    "INFO: Initializing Rabin_v2.5.pt NLP model...",
-    "SUCCESS: Data pipeline optimization complete (Latency: -42%)",
-    "INFO: Deploying ML microservices via FastAPI...",
-    "SUCCESS: PyTorch tensor embeddings generated.",
-    "INFO: Running DVC pipeline to sync datasets...",
-    "Awaiting new data streams...",
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +27,7 @@ const Footer = () => {
   return (
     <footer className="relative border-t border-slate-800 bg-slate-950 font-mono pt-16 pb-8 overflow-hidden">
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e510_1px,transparent_1px),linear-gradient(to_bottom,#4f46e510_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e510_1px,transparent_1px),linear-gradient(to_bottom,#4f46e510_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_100%_60%_at_50%_50%,#000_75%,transparent_100%)] pointer-events-none" />
 
       {/* Top glowing data stream line */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
@@ -34,28 +37,18 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Left Column: Diagnostics */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-indigo-400 text-xs font-bold uppercase tracking-[0.2em] mb-2 border-b border-slate-800 pb-2">
-              System Diagnostics
+            <h3 className="font-display text-xl font-semibold text-slate-100 tracking-tight mb-2 border-b border-slate-800 pb-2">
+              Rabin Poudel<span className="text-indigo-500">.</span>
             </h3>
-            <div className="text-[10px] text-slate-400 space-y-3 uppercase tracking-widest">
-              <div className="flex justify-between items-center">
-                <span>Core_Focus:</span>
-                <span className="text-emerald-400 font-bold">
-                  Data-Science, NLP, AI
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Primary_Lang:</span>
-                <span className="text-indigo-300">Python</span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span>Status:</span>
-                <span className="text-emerald-400 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_5px_rgba(16,185,129,0.8)]" />
-                  Available_For_Hire
-                </span>
-              </div>
+            <p className="text-slate-400 text-xs leading-relaxed">
+              AI/ML Engineer based in Nepal. Building intelligent systems with
+              deep learning, NLP, and production-ready ML pipelines.
+            </p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_5px_rgba(16,185,129,0.8)]" />
+              <span className="text-emerald-400 text-[10px] uppercase tracking-widest font-bold">
+                Available for Opportunities
+              </span>
             </div>
           </div>
 
@@ -90,70 +83,25 @@ const Footer = () => {
               External_Nodes
             </h3>
             <div className="flex flex-col gap-3">
-              <a
-                href="https://www.linkedin.com/in/rabin-poudel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between p-2.5 border border-slate-800 hover:border-indigo-500/50 bg-slate-900/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <FaLinkedin className="text-indigo-500 text-lg group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] text-slate-400 group-hover:text-indigo-300 uppercase tracking-widest transition-colors">
-                    LinkedIn_Profile
+              {socials.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between p-2.5 border border-slate-800 hover:border-indigo-500/50 bg-slate-900/50 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <social.icon className="text-indigo-500 text-lg group-hover:scale-110 transition-transform" />
+                    <span className="text-[10px] text-slate-400 group-hover:text-indigo-300 uppercase tracking-widest transition-colors">
+                      {social.name}
+                    </span>
+                  </div>
+                  <span className="text-[9px] text-slate-600 group-hover:text-indigo-500 transition-colors">
+                    {"->"} {social.action}
                   </span>
-                </div>
-                <span className="text-[9px] text-slate-600 group-hover:text-indigo-500 transition-colors">
-                  {"->"} Connect
-                </span>
-              </a>
-              <a
-                href="https://www.github.com/rabinverse"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between p-2.5 border border-slate-800 hover:border-indigo-500/50 bg-slate-900/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <motion.div
-                    animate={{
-                      y: [0, -4, 0],
-                      filter: [
-                        "drop-shadow(0 0 2px rgba(99,102,241,0.4))",
-                        "drop-shadow(0 0 8px rgba(99,102,241,1))",
-                        "drop-shadow(0 0 2px rgba(99,102,241,0.4))",
-                      ],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <FaGithub className="text-indigo-500 group-hover:scale-110 transition-transform" />
-                  </motion.div>
-                  <span className="text-[10px] text-slate-400 group-hover:text-indigo-300 uppercase tracking-widest transition-colors">
-                    GitHub_Repo
-                  </span>
-                </div>
-                <span className="text-[9px] text-slate-600 group-hover:text-indigo-500 transition-colors">
-                  {"->"} View_Code
-                </span>
-              </a>
-              <a
-                href="https://x.com/PoudelRabin5824?s=09"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between p-2.5 border border-slate-800 hover:border-indigo-500/50 bg-slate-900/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <FaTwitter className="text-indigo-500 text-lg group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] text-slate-400 group-hover:text-indigo-300 uppercase tracking-widest transition-colors">
-                    X_Timeline
-                  </span>
-                </div>
-                <span className="text-[9px] text-slate-600 group-hover:text-indigo-500 transition-colors">
-                  {"->"} Follow
-                </span>
-              </a>
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -163,9 +111,29 @@ const Footer = () => {
           <p className="text-slate-500 text-[10px] uppercase tracking-[0.3em]">
             © {new Date().getFullYear()} Rabin Poudel. All rights reserved.
           </p>
-          <div className="text-slate-600 text-[9px] uppercase tracking-[0.3em]">
-            SESSION_ID:{" "}
-            {Math.random().toString(36).substring(2, 12).toUpperCase()}
+
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-slate-500 hover:text-indigo-400 border border-slate-800 hover:border-indigo-500/50 rounded-full px-2 py-1.5 transition-all duration-300 group"
+            >
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 8V2M1 5l4-4 4 4" />
+              </svg>
+            </button>
+
+            <div className="text-slate-600 text-[9px] uppercase tracking-[0.3em]">
+              SESSION_ID: {sessionId}
+            </div>
           </div>
         </div>
       </div>

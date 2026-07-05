@@ -1,26 +1,40 @@
-import { useState } from "react";
-import reactLogo from "./assets/projects/project-1.webp";
-import viteLogo from "./assets/projects/project-1.webp";
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import About from "./components/About";
 import Technologies from "./components/Technologies";
 import Projects from "./components/Projects";
 import Experience from "./components/ResumeSection";
+import Writing from "./components/Writing";
 import Contact from "./components/Contact";
-import '@fontsource/roboto';
-import '@fontsource/montserrat';
-import '@fontsource/poppins';
-import '@fontsource/inter';
-import '@fontsource/lato';
-import About from "./components/About";
-import Skills from "./components/Skills";
 import Footer from "./components/Footer";
 import SideNav from "./components/SideNav";
+import "@fontsource-variable/fraunces";
 
 function App() {
+  useEffect(() => {
+    const bar = document.getElementById("progress-bar");
+    const handle = () => {
+      const pct =
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+        100;
+      bar.style.width = pct + "%";
+    };
+    window.addEventListener("scroll", handle, { passive: true });
+    return () => window.removeEventListener("scroll", handle);
+  }, []);
+
   return (
     <>
-      <div className="text-red overflow-x-hidden text-stone-300 antialiased relative">
+      <div className="fixed top-0 left-0 w-full z-[9999] h-[2px] pointer-events-none">
+        <div
+          id="progress-bar"
+          className="h-full bg-indigo-500"
+          style={{ width: "0%", boxShadow: "0 0 8px rgba(99,102,241,0.8)" }}
+        />
+      </div>
+      <div className="overflow-x-hidden text-stone-300 antialiased relative">
         <SideNav />
         <div className="fixed inset-0 -z-10">
           <div className="relative h-full w-full bg-slate-950">
@@ -30,12 +44,13 @@ function App() {
         <div className="container mx-auto px-8 relative z-10">
           <Navbar />
           <Hero />
+          <About />
           <Technologies />
-          {/* <Skills /> */}
           <Projects />
           <Experience />
-          <Contact /> 
-          <Footer/>
+          <Writing />
+          <Contact />
+          <Footer />
         </div>
       </div>
     </>
