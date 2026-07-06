@@ -88,8 +88,34 @@ const SideNav = () => {
   };
 
   return (
-    <div
-      className="fixed left-6 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col font-mono"
+    <>
+      {/* Mobile bottom nav — icons only */}
+      <nav className="fixed bottom-3 left-1/2 -translate-x-1/2 z-[100] md:hidden font-mono">
+        <div className="flex items-center gap-1 px-2 py-1.5 bg-slate-950/85 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.8)]">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.to;
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.to}
+                onClick={() => scrollTo(item.to)}
+                aria-label={`Scroll to ${item.name}`}
+                className={`flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300 ${
+                  isActive
+                    ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30"
+                    : "text-slate-500 border border-transparent"
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* Desktop left rail */}
+      <div
+        className="fixed left-6 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col font-mono"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -121,7 +147,8 @@ const SideNav = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

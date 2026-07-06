@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1050" height="600" viewBox="0 0 1050 600">
+  <rect width="1050" height="600" fill="#020617"/>
+  <rect x="60" y="50" width="930" height="500" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <rect x="60" y="50" width="930" height="44" fill="#1e293b"/>
+  <circle cx="90" cy="72" r="7" fill="#ef4444"/>
+  <circle cx="115" cy="72" r="7" fill="#eab308"/>
+  <circle cx="140" cy="72" r="7" fill="#22c55e"/>
+  <text x="180" y="79" font-family="Menlo, monospace" font-size="18" fill="#94a3b8">web_scraping.ipynb — companies_df</text>
+  <g font-family="Menlo, monospace" font-size="20">
+    <text x="100" y="140" fill="#818cf8">&gt;&gt;&gt; df = scrape_ambitionbox(pages=50)</text>
+    <text x="100" y="175" fill="#64748b">Fetching page 50/50 ... 200 OK</text>
+    <text x="100" y="230" fill="#e2e8f0" font-weight="bold">   name            rating   type      jobs   reviews</text>
+    <line x1="100" y1="245" x2="950" y2="245" stroke="#334155" stroke-width="2"/>
+    <text x="100" y="285" fill="#94a3b8">0  TCS             <tspan fill="#34d399">3.7</tspan>      Public    1.2k   88k</text>
+    <text x="100" y="325" fill="#94a3b8">1  Accenture       <tspan fill="#34d399">3.9</tspan>      Public    804    55k</text>
+    <text x="100" y="365" fill="#94a3b8">2  Cognizant       <tspan fill="#34d399">3.8</tspan>      Private   513    48k</text>
+    <text x="100" y="405" fill="#94a3b8">3  Infosys         <tspan fill="#34d399">3.6</tspan>      Public    967    62k</text>
+    <text x="100" y="445" fill="#94a3b8">4  Wipro           <tspan fill="#34d399">3.7</tspan>      Public    421    51k</text>
+    <text x="100" y="505" fill="#818cf8">[500 rows x 6 columns]</text>
+  </g>
+</svg>

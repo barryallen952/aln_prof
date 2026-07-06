@@ -13,6 +13,8 @@ import {
 
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
+const MAX_VISIBLE = 9;
+
 const ProjectCard = ({ project, index, isVisible, onOpen }) => (
   <button
     type="button"
@@ -39,9 +41,14 @@ const ProjectCard = ({ project, index, isVisible, onOpen }) => (
 
       {/* Top row */}
       <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-        <span className="px-2 py-0.5 bg-slate-950/70 backdrop-blur-sm border border-slate-700 text-indigo-300 text-[9px] uppercase tracking-widest">
-          {project.category}
-        </span>
+        {project.categories.map((category) => (
+          <span
+            key={category}
+            className="px-2 py-0.5 bg-slate-950/70 backdrop-blur-sm border border-slate-700 text-indigo-300 text-[9px] uppercase tracking-widest"
+          >
+            {category}
+          </span>
+        ))}
         {project.featured && (
           <span className="flex items-center gap-1 px-2 py-0.5 bg-amber-400/10 border border-amber-400/40 text-amber-300 text-[9px] uppercase tracking-widest">
             <Star className="w-2.5 h-2.5 fill-amber-300" /> Featured
@@ -131,9 +138,14 @@ const ProjectModal = ({ project, onClose }) => (
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none" />
         <div className="absolute top-3 left-3 flex items-center gap-2">
-          <span className="px-2 py-0.5 bg-slate-950/70 backdrop-blur-sm border border-slate-700 text-indigo-300 text-[9px] uppercase tracking-widest">
-            {project.category}
-          </span>
+          {project.categories.map((category) => (
+            <span
+              key={category}
+              className="px-2 py-0.5 bg-slate-950/70 backdrop-blur-sm border border-slate-700 text-indigo-300 text-[9px] uppercase tracking-widest"
+            >
+              {category}
+            </span>
+          ))}
           {project.featured && (
             <span className="flex items-center gap-1 px-2 py-0.5 bg-amber-400/10 border border-amber-400/40 text-amber-300 text-[9px] uppercase tracking-widest">
               <Star className="w-2.5 h-2.5 fill-amber-300" /> Featured
@@ -242,6 +254,7 @@ const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const [selected, setSelected] = useState(null);
+  const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -270,10 +283,13 @@ const ProjectsSection = () => {
     };
   }, [selected]);
 
-  const visibleProjects =
+  const filteredProjects =
     activeCategory === "All"
       ? projects
-      : projects.filter((p) => p.category === activeCategory);
+      : projects.filter((p) => p.categories.includes(activeCategory));
+  const visibleProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, MAX_VISIBLE);
 
   return (
     <section
@@ -314,7 +330,10 @@ const ProjectsSection = () => {
           {projectCategories.map((category) => (
             <button
               key={category}
-              onClick={() => setActiveCategory(category)}
+              onClick={() => {
+                setActiveCategory(category);
+                setShowAll(false);
+              }}
               className={cn(
                 "px-4 py-2 text-[10px] uppercase tracking-[0.2em] font-bold border transition-all duration-300",
                 activeCategory === category
@@ -340,6 +359,19 @@ const ProjectsSection = () => {
             />
           ))}
         </div>
+
+        {filteredProjects.length > MAX_VISIBLE && (
+          <div className="mt-10 text-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-6 py-2 text-[10px] uppercase tracking-[0.2em] font-bold border bg-slate-900 border-slate-800 text-slate-400 hover:border-indigo-500/40 hover:text-slate-200 transition-all duration-300"
+            >
+              {showAll
+                ? "Show less"
+                : `Show all `}
+            </button>
+          </div>
+        )}
 
         <div
           className={cn(

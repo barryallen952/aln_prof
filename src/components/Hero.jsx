@@ -79,25 +79,18 @@ const Hero = () => {
                 <div className="group relative overflow-hidden">
                   <div className="absolute inset-0 bg-indigo-500/10 z-10 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
                   <motion.div
-                    className="absolute left-0 w-full h-[2px] bg-indigo-400/80 shadow-[0_0_10px_rgba(129,140,248,1)] z-20 pointer-events-none"
-                    animate={{ top: ["0%", "100%", "0%"] }}
-                    transition={{
-                      duration: 10,
-                      ease: "linear",
-                      repeat: Infinity,
-                    }}
-                  />
-                  <div className="absolute top-1/2 left-0 w-full h-full border-t border-indigo-500/20 z-20 pointer-events-none" />
-                  <div className="absolute top-0 left-1/2 w-full h-full border-l border-indigo-500/20 z-20 pointer-events-none" />
-                  <div className="absolute top-4 right-4 z-20 bg-slate-950/80 border border-indigo-500/50 px-2 py-1 text-[10px] text-indigo-300 backdrop-blur-sm pointer-events-none">
+                    className="absolute top-4 right-4 z-20 bg-slate-950/60 border border-indigo-500/30 px-2 py-1 text-[9px] text-indigo-300/90 backdrop-blur-sm pointer-events-none"
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 4, ease: "easeInOut", repeat: Infinity }}
+                  >
                     entity: PERSON
                     <br />
                     conf: 0.998
-                  </div>
+                  </motion.div>
                   <img
                     src={profile_pic}
                     alt="Profile Image"
-                    className="w-full max-w-[600px] lg:max-w-[480px] object-cover filter contrast-125 grayscale-[0.8] group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full max-w-[600px] lg:max-w-[480px] object-cover filter contrast-125 grayscale-[0.8] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
                 </div>
               </div>
